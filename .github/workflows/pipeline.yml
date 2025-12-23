@@ -1,28 +1,24 @@
-name: CI Pipeline
+name: Basic Pipeline
 
+# Trigger pipeline on every push to main
 on:
   push:
     branches:
-      - main   # triggers on commit to main
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'   # change if needed
+      # Step 2: List files in repo (optional, just to show it works)
+      - name: List files
+        run: ls -la
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run tests
-      run: npm test        # replace with your test command
-
-    - name: Build project
-      run: npm run build   # replace with your build command
+      # Step 3: Confirm pipeline is running
+      - name: Pipeline success message
+        run: echo "Pipeline executed successfully ✅"
